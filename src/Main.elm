@@ -17,14 +17,14 @@ main =
 
 type alias Model =
   { passwordlength : Int
-  , input : String
+  , symbols : Bool
   }
 
 
 init : Model
 init =
   { passwordlength = 8
-  , input = ""
+  , symbols = True
   }
 
 
@@ -34,6 +34,7 @@ init =
 
 type Msg
   = PasswordLengthChange String
+  | SymbolsToggle Bool
 
 
 update : Msg -> Model -> Model
@@ -41,6 +42,8 @@ update msg model =
   case msg of
     PasswordLengthChange a ->
       { model | passwordlength = numDefault (String.toInt a) }
+    SymbolsToggle checked ->
+      { model | symbols = checked }
 
 
 numDefault : Maybe Int -> Int
@@ -69,30 +72,28 @@ view model =
             td []
             [
               label [] [
-                input [ type_ "checkbox", value "checked" ] [],
+                input [ type_ "checkbox", checked True ] [],
                 span [] [ text "数字" ]
               ],
               label [] [
-                input [ type_ "checkbox", value "checked" ] [],
+                input [ type_ "checkbox", checked True ] [],
                 span [] [ text "英字" ]
               ],
               label [] [
-                input [ type_ "checkbox", value "checked" ] [],
+                input [ type_ "checkbox", checked model.symbols, onCheck SymbolsToggle ] [],
                 span [] [ text "記号" ]
               ]
             ]
           ],
-          -- tr [] -- 文字数の列
-          -- [
-          --   th []
-          --   [ text "文字数" ],
-          --   td []
-          --   [
-          --     button [ onClick PasswordLengthDecrement ] [ text "-" ],
-          --     span [] [ text (String.fromInt(model.passwordlength)) ],
-          --     button [ onClick PasswordLengthIncrement ] [ text "+" ]
-          --   ]
-          -- ]
+          tr [ class (if model.symbols then "on" else "off") ] -- 使用するシンボル
+          [
+            th []
+            [ text "文字数" ],
+            td []
+            [
+              div [] []
+            ]
+          ],
           tr [] -- 文字数の列
           [
             th []

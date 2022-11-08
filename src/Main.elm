@@ -88,7 +88,7 @@ view model =
           tr [ class (if model.symbols then "on" else "off") ] -- 使用するシンボル
           [
             th []
-            [ text "文字数" ],
+            [ text "使用する記号" ],
             td []
             [
               div [] []

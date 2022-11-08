@@ -49,10 +49,31 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-  node "main" []
+  main_ []
     [
       div [ class "a" ]
-      [ input [ type_ "t", placeholder "p", value "v" ] []
+      [
+        table []
+        [
+          tr [] -- 使用する文字の列
+          [
+            th []
+            [ text "使用する文字" ],
+            td []
+            [
+              button [ onClick ToggleText ] [ text "Toggle" ]
+            ]
+          ],
+          tr [] -- 文字数の列
+          [
+            th []
+            [ text "文字数" ],
+            td []
+            [
+              button [ onClick ToggleText ] [ text "Toggle" ]
+            ]
+          ]
+        ]
       ],
       div [ class "a" ]
       [ button [ onClick ToggleText ] [ text "Toggle" ]

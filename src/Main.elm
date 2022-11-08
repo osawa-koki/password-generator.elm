@@ -16,12 +16,16 @@ main =
 
 
 type alias Model =
-  String
+  { passwordlength : Int
+  , input : String
+  }
 
 
 init : Model
 init =
-  ""
+  { passwordlength = 8
+  , input = ""
+  }
 
 
 
@@ -29,18 +33,23 @@ init =
 
 
 type Msg
-  = ToggleText
+  = PasswordLengthIncrement
+  | PasswordLengthDecrement
+  | PasswordLengthChange
+  | Password String
 
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    ToggleText ->
-      if model == "" then
-        "Hello World!"
-
-      else
-        ""
+    PasswordLengthIncrement ->
+      { model | passwordlength = model.passwordlength + 1 }
+    PasswordLengthDecrement ->
+      { model | passwordlength = model.passwordlength - 1 }
+    PasswordLengthChange ->
+      { model | passwordlength = model.passwordlength + 1 }
+    Password input ->
+      { model | input = input }
 
 
 
@@ -61,23 +70,51 @@ view model =
             [ text "使用する文字" ],
             td []
             [
-              button [ onClick ToggleText ] [ text "Toggle" ]
+              label [] [
+                input [ type_ "checkbox", value "checked" ] [],
+                span [] [ text "数字" ]
+              ],
+              label [] [
+                input [ type_ "checkbox", value "checked" ] [],
+                span [] [ text "英字" ]
+              ],
+              label [] [
+                input [ type_ "checkbox", value "checked" ] [],
+                span [] [ text "記号" ]
+              ]
             ]
           ],
+          -- tr [] -- 文字数の列
+          -- [
+          --   th []
+          --   [ text "文字数" ],
+          --   td []
+          --   [
+          --     button [ onClick PasswordLengthDecrement ] [ text "-" ],
+          --     span [] [ text (String.fromInt(model.passwordlength)) ],
+          --     button [ onClick PasswordLengthIncrement ] [ text "+" ]
+          --   ]
+          -- ]
           tr [] -- 文字数の列
           [
             th []
             [ text "文字数" ],
             td []
             [
-              button [ onClick ToggleText ] [ text "Toggle" ]
+              input [ type_ "range", Html.Attributes.min "8", Html.Attributes.max "32", step "1", value (String.fromInt(model.passwordlength)) ] [],
+              span [] [ text (String.fromInt(model.passwordlength)) ]
             ]
           ]
         ]
       ],
       div [ class "a" ]
-      [ button [ onClick ToggleText ] [ text "Toggle" ]
-      , button [ onClick ToggleText ] [ text "Toggle Text" ]
-      , div [ class "text" ] [ text model ]
+      [ button [ onClick PasswordLengthDecrement ] [ text "Toggle" ]
+      , button [ onClick PasswordLengthDecrement ] [ text "Toggle Text" ]
+      , div [ class "text" ] [ text "model" ]
       ]
     ]
+
+viewInput : String -> String -> String -> (String -> msg) -> Html msg
+viewInput t p v toMsg =
+  input [ type_ t, placeholder p, value v, onInput toMsg ] []
+

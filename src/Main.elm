@@ -33,23 +33,21 @@ init =
 
 
 type Msg
-  = PasswordLengthIncrement
-  | PasswordLengthDecrement
-  | PasswordLengthChange
-  | Password String
+  = PasswordLengthChange String
 
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
-    PasswordLengthIncrement ->
-      { model | passwordlength = model.passwordlength + 1 }
-    PasswordLengthDecrement ->
-      { model | passwordlength = model.passwordlength - 1 }
-    PasswordLengthChange ->
-      { model | passwordlength = model.passwordlength + 1 }
-    Password input ->
-      { model | input = input }
+    PasswordLengthChange a ->
+      { model | passwordlength = numDefault (String.toInt a) }
+
+
+numDefault : Maybe Int -> Int
+numDefault maybezero =
+  case maybezero of
+    Just num -> num
+    Nothing -> 8
 
 
 
@@ -101,15 +99,15 @@ view model =
             [ text "文字数" ],
             td []
             [
-              input [ type_ "range", Html.Attributes.min "8", Html.Attributes.max "32", step "1", value (String.fromInt(model.passwordlength)) ] [],
+              input [ type_ "range", Html.Attributes.min "8", Html.Attributes.max "32", step "1", value (String.fromInt(model.passwordlength)), onInput PasswordLengthChange ] [],
               span [] [ text (String.fromInt(model.passwordlength)) ]
             ]
           ]
         ]
       ],
       div [ class "resultContainer" ]
-      [ button [ onClick PasswordLengthDecrement ] [ text "Toggle" ]
-      , button [ onClick PasswordLengthDecrement ] [ text "Toggle Text" ]
+      [ button [ ] [ text "Toggle" ]
+      , button [ ] [ text "Toggle Text" ]
       , div [ class "text" ] [ text "model" ]
       ]
     ]

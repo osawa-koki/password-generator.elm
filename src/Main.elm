@@ -60,7 +60,7 @@ view : Model -> Html Msg
 view model =
   main_ []
     [
-      div [ class "a" ]
+      div [ class "settingContainer" ]
       [
         table []
         [
@@ -107,7 +107,7 @@ view model =
           ]
         ]
       ],
-      div [ class "a" ]
+      div [ class "resultContainer" ]
       [ button [ onClick PasswordLengthDecrement ] [ text "Toggle" ]
       , button [ onClick PasswordLengthDecrement ] [ text "Toggle Text" ]
       , div [ class "text" ] [ text "model" ]

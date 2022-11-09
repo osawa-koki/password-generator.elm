@@ -187,7 +187,7 @@ view model =
         ]
       ],
       div [ class "resultContainer" ]
-      [ button [ ] [ text "generate!" ]
+      [ button [] [ text "generate!" ]
       , div [ class "text" ] [ text "" ]
       ]
     ]

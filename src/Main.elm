@@ -169,13 +169,10 @@ view model =
           [
             th []
             [ text "使用する記号" ],
-            td []
-            [
-              div [] <| List.map (\x -> label [] [
-                input [ type_ "checkbox", checked x.ison, onCheck <| SymbolSetChange x.description_en ] [],
-                span [] [ text <| x.content ++ " " ++ "(" ++ x.description_ja ++ ")" ]
-              ]) model.symbolset
-            ]
+            td [] <| List.map (\x -> label [] [
+              input [ type_ "checkbox", checked x.ison, onCheck <| SymbolSetChange x.description_en ] [],
+              span [] [ text <| x.content ++ " " ++ "(" ++ x.description_ja ++ ")" ]
+            ]) model.symbolset
           ],
           tr [] -- 文字数の列
           [

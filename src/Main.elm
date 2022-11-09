@@ -4,6 +4,7 @@ import Browser
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
+import Random
 
 
 main : Program () Model Msg
@@ -20,6 +21,38 @@ type alias Model =
   , numeric : Bool
   , alphemeric : Bool
   , symbol : Bool
+  , symbolset : {
+      sharp : Bool
+    , dollar : Bool
+    , percent : Bool
+    , ampersand : Bool
+    , at : Bool
+    , star : Bool
+    , plus : Bool
+    , minus : Bool
+    , equal : Bool
+    , exclamation : Bool
+    , question : Bool
+    , tilde : Bool
+    , colon : Bool
+    , semicolon : Bool
+    , comma : Bool
+    , dot : Bool
+    , slash : Bool
+    , backslash : Bool
+    , pipe : Bool
+    , underscore : Bool
+    , leftparenthesis : Bool
+    , rightparenthesis : Bool
+    , leftbracket : Bool
+    , rightbracket : Bool
+    , leftbrace : Bool
+    , rightbrace : Bool
+    , less : Bool
+    , greater : Bool
+    , doublequote : Bool
+    , singlequote : Bool
+    }
   }
 
 
@@ -29,6 +62,38 @@ init =
   , numeric = True
   , alphemeric = True
   , symbol = True
+  , symbolset = {
+      sharp = True
+    , dollar = True
+    , percent = True
+    , ampersand = True
+    , at = True
+    , star = True
+    , plus = True
+    , minus = True
+    , equal = True
+    , exclamation = True
+    , question = True
+    , tilde = True
+    , colon = True
+    , semicolon = True
+    , comma = True
+    , dot = True
+    , slash = True
+    , backslash = True
+    , pipe = True
+    , underscore = True
+    , leftparenthesis = True
+    , rightparenthesis = True
+    , leftbracket = True
+    , rightbracket = True
+    , leftbrace = True
+    , rightbrace = True
+    , less = True
+    , greater = True
+    , doublequote = True
+    , singlequote = True
+    }
   }
 
 
@@ -54,6 +119,28 @@ update msg model =
       { model | numeric = a }
     SymbolChange a ->
       { model | symbol = a }
+
+
+type alias CharCount =
+  { numeric : Int
+  , alphemeric : Int
+  , symbol : Int
+  }
+
+charCount =
+  { numeric = 10
+  , alphemeric = 52
+  , symbol = 0
+  }
+  
+
+createRandomString : Int -> Model -> String
+createRandomString length model =
+  let
+    randomString = String.fromInt model.passwordlength
+  in
+    randomString
+
 
 
 numDefault : Maybe Int -> Int

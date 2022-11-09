@@ -19,7 +19,7 @@ type alias Model =
   { passwordlength : Int
   , numeric : Bool
   , alphemeric : Bool
-  , symbols : Bool
+  , symbol : Bool
   }
 
 
@@ -28,7 +28,7 @@ init =
   { passwordlength = 8
   , numeric = True
   , alphemeric = True
-  , symbols = True
+  , symbol = True
   }
 
 
@@ -40,7 +40,7 @@ type Msg
   = PasswordLengthChange String
   | NumericChange Bool
   | AlphemericChange Bool
-  | SymbolsChange Bool
+  | SymbolChange Bool
 
 
 update : Msg -> Model -> Model
@@ -52,7 +52,7 @@ update msg model =
       { model | alphemeric = a }
     NumericChange a ->
       { model | numeric = a }
-    SymbolsChange a ->
+    SymbolChange a ->
       { model | symbols = a }
 
 
@@ -90,12 +90,12 @@ view model =
                 span [] [ text "英字" ]
               ],
               label [] [
-                input [ type_ "checkbox", checked model.symbols, onCheck SymbolsChange ] [],
+                input [ type_ "checkbox", checked model.symbol, onCheck SymbolChange ] [],
                 span [] [ text "記号" ]
               ]
             ]
           ],
-          tr [ class (if model.symbols then "on" else "off") ] -- 使用するシンボル
+          tr [ class (if model.symbol then "on" else "off") ] -- 使用するシンボル
           [
             th []
             [ text "使用する記号" ],

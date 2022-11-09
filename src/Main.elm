@@ -127,12 +127,13 @@ type alias CharCount =
   , symbol : Int
   }
 
+charCount : CharCount
 charCount =
   { numeric = 10
   , alphemeric = 52
   , symbol = 0
   }
-  
+
 
 createRandomString : Int -> Model -> String
 createRandomString length model =

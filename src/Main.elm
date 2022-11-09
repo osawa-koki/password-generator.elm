@@ -165,7 +165,7 @@ view model =
               ]
             ]
           ],
-          tr [ class (if model.symbol then "on" else "off") ] -- 使用するシンボル
+          tr [ class (if model.symbol then "on" else "off"){-, style "display" (if model.symbol then "block" else "none")-} ] -- 使用するシンボル
           [
             th []
             [ text "使用する記号" ],

@@ -16,43 +16,19 @@ main =
 -- MODEL
 
 
+type alias CharRecord =
+  { description: String
+  , content: String
+  , ison: Bool
+  }
+
+
 type alias Model =
   { passwordlength : Int
   , numeric : Bool
   , alphemeric : Bool
   , symbol : Bool
-  , symbolset : {
-      sharp : Bool
-    , dollar : Bool
-    , percent : Bool
-    , ampersand : Bool
-    , at : Bool
-    , star : Bool
-    , plus : Bool
-    , minus : Bool
-    , equal : Bool
-    , exclamation : Bool
-    , question : Bool
-    , tilde : Bool
-    , colon : Bool
-    , semicolon : Bool
-    , comma : Bool
-    , dot : Bool
-    , slash : Bool
-    , backslash : Bool
-    , pipe : Bool
-    , underscore : Bool
-    , leftparenthesis : Bool
-    , rightparenthesis : Bool
-    , leftbracket : Bool
-    , rightbracket : Bool
-    , leftbrace : Bool
-    , rightbrace : Bool
-    , less : Bool
-    , greater : Bool
-    , doublequote : Bool
-    , singlequote : Bool
-    }
+  , symbolset : List CharRecord
   }
 
 
@@ -62,38 +38,39 @@ init =
   , numeric = True
   , alphemeric = True
   , symbol = True
-  , symbolset = {
-      sharp = True
-    , dollar = True
-    , percent = True
-    , ampersand = True
-    , at = True
-    , star = True
-    , plus = True
-    , minus = True
-    , equal = True
-    , exclamation = True
-    , question = True
-    , tilde = True
-    , colon = True
-    , semicolon = True
-    , comma = True
-    , dot = True
-    , slash = True
-    , backslash = True
-    , pipe = True
-    , underscore = True
-    , leftparenthesis = True
-    , rightparenthesis = True
-    , leftbracket = True
-    , rightbracket = True
-    , leftbrace = True
-    , rightbrace = True
-    , less = True
-    , greater = True
-    , doublequote = True
-    , singlequote = True
-    }
+  , symbolset = [
+    { description = "Ampersand", content = "&", ison = True }
+    , { description = "Apostrophe", content = "'", ison = True }
+    , { description = "At", content = "@", ison = True }
+    , { description = "Backslash", content = "\\", ison = True }
+    , { description = "Backtick", content = "`", ison = True }
+    , { description = "Bar", content = "|", ison = True }
+    , { description = "Caret", content = "^", ison = True }
+    , { description = "Colon", content = ":", ison = True }
+    , { description = "Comma", content = ",", ison = True }
+    , { description = "Dollar", content = "$", ison = True }
+    , { description = "Double Quote", content = "\"", ison = True }
+    , { description = "Equal", content = "=", ison = True }
+    , { description = "Exclamation", content = "!", ison = True }
+    , { description = "Greater Than", content = ">", ison = True }
+    , { description = "Hash", content = "#", ison = True }
+    , { description = "Left Brace", content = "{", ison = True }
+    , { description = "Left Bracket", content = "[", ison = True }
+    , { description = "Left Parenthesis", content = "(", ison = True }
+    , { description = "Less Than", content = "<", ison = True }
+    , { description = "Minus", content = "-", ison = True }
+    , { description = "Percent", content = "%", ison = True }
+    , { description = "Period", content = ".", ison = True }
+    , { description = "Plus", content = "+", ison = True }
+    , { description = "Question", content = "?", ison = True }
+    , { description = "Right Brace", content = "}", ison = True }
+    , { description = "Right Bracket", content = "]", ison = True }
+    , { description = "Right Parenthesis", content = ")", ison = True }
+    , { description = "Semicolon", content = ";", ison = True }
+    , { description = "Slash", content = "/", ison = True }
+    , { description = "Space", content = " ", ison = True }
+    , { description = "Tilde", content = "~", ison = True }
+  ]
   }
 
 

@@ -186,9 +186,8 @@ view model =
         ]
       ],
       div [ class "resultContainer" ]
-      [ button [ ] [ text "Toggle" ]
-      , button [ ] [ text "Toggle Text" ]
-      , div [ class "text" ] [ text "model" ]
+      [ button [ ] [ text "generate!" ]
+      , div [ class "text" ] [ text "" ]
       ]
     ]
 

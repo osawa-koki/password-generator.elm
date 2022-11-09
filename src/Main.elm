@@ -84,6 +84,7 @@ type Msg
   | NumericChange Bool
   | AlphemericChange Bool
   | SymbolChange Bool
+  | SymbolSetChange String Bool
 
 
 update : Msg -> Model -> Model
@@ -97,6 +98,8 @@ update msg model =
       { model | numeric = a }
     SymbolChange a ->
       { model | symbol = a }
+    SymbolSetChange a b ->
+      { model | symbolset = List.map (\x -> if x.content == a then { x | ison = b } else x) model.symbolset }
 
 
 type alias CharCount =
@@ -127,6 +130,7 @@ numDefault maybezero =
   case maybezero of
     Just num -> num
     Nothing -> 8
+
 
 
 
@@ -168,7 +172,7 @@ view model =
             td []
             [
               div [] <| List.map (\x -> label [] [
-                input [ type_ "checkbox", checked x.ison, onCheck SymbolChange ] [],
+                input [ type_ "checkbox", checked x.ison, onCheck <| SymbolSetChange x.description_en ] [],
                 span [] [ text <| x.content ++ " " ++ "(" ++ x.description_ja ++ ")" ]
               ]) model.symbolset
             ]

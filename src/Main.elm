@@ -30,6 +30,7 @@ type alias Model =
   , alphemeric : Bool
   , symbol : Bool
   , symbolset : List CharRecord
+  , resultlist : List String
   }
 
 
@@ -72,6 +73,7 @@ init =
     , { description_en = "Space", description_ja = "スペース", content = " ", ison = True }
     , { description_en = "Tilde", description_ja = "チルダ", content = "~", ison = True }
   ]
+  , resultlist = []
   }
 
 

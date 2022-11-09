@@ -53,7 +53,7 @@ update msg model =
     NumericChange a ->
       { model | numeric = a }
     SymbolChange a ->
-      { model | symbols = a }
+      { model | symbol = a }
 
 
 numDefault : Maybe Int -> Int

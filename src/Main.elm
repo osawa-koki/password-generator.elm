@@ -99,7 +99,7 @@ update msg model =
     SymbolChange a ->
       { model | symbol = a }
     SymbolSetChange a b ->
-      { model | symbolset = List.map (\x -> if x.content == a then { x | ison = b } else x) model.symbolset }
+      { model | symbolset = List.map (\x -> if x.description_en == a then { x | ison = b } else x) model.symbolset }
 
 
 type alias CharCount =

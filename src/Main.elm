@@ -17,6 +17,8 @@ main =
 
 type alias Model =
   { passwordlength : Int
+  , numeric : Bool
+  , alphemeric : Bool
   , symbols : Bool
   }
 
@@ -24,6 +26,8 @@ type alias Model =
 init : Model
 init =
   { passwordlength = 8
+  , numeric = True
+  , alphemeric = True
   , symbols = True
   }
 
@@ -34,16 +38,22 @@ init =
 
 type Msg
   = PasswordLengthChange String
-  | SymbolsToggle Bool
+  | NumericChange Bool
+  | AlphemericChange Bool
+  | SymbolsChange Bool
 
 
 update : Msg -> Model -> Model
 update msg model =
   case msg of
     PasswordLengthChange a ->
-      { model | passwordlength = numDefault (String.toInt a) }
-    SymbolsToggle checked ->
-      { model | symbols = checked }
+      { model | passwordlength = numDefault <| String.toInt a }
+    AlphemericChange a ->
+      { model | alphemeric = a }
+    NumericChange a ->
+      { model | numeric = a }
+    SymbolsChange a ->
+      { model | symbols = a }
 
 
 numDefault : Maybe Int -> Int
@@ -72,15 +82,15 @@ view model =
             td []
             [
               label [] [
-                input [ type_ "checkbox", checked True ] [],
+                input [ type_ "checkbox", checked model.numeric, onCheck NumericChange ] [],
                 span [] [ text "数字" ]
               ],
               label [] [
-                input [ type_ "checkbox", checked True ] [],
+                input [ type_ "checkbox", checked model.alphemeric, onCheck AlphemericChange ] [],
                 span [] [ text "英字" ]
               ],
               label [] [
-                input [ type_ "checkbox", checked model.symbols, onCheck SymbolsToggle ] [],
+                input [ type_ "checkbox", checked model.symbols, onCheck SymbolsChange ] [],
                 span [] [ text "記号" ]
               ]
             ]

@@ -17,7 +17,8 @@ main =
 
 
 type alias CharRecord =
-  { description: String
+  { description_en: String
+  , description_ja: String
   , content: String
   , ison: Bool
   }
@@ -39,37 +40,37 @@ init =
   , alphemeric = True
   , symbol = True
   , symbolset = [
-    { description = "Ampersand", content = "&", ison = True }
-    , { description = "Apostrophe", content = "'", ison = True }
-    , { description = "At", content = "@", ison = True }
-    , { description = "Backslash", content = "\\", ison = True }
-    , { description = "Backtick", content = "`", ison = True }
-    , { description = "Bar", content = "|", ison = True }
-    , { description = "Caret", content = "^", ison = True }
-    , { description = "Colon", content = ":", ison = True }
-    , { description = "Comma", content = ",", ison = True }
-    , { description = "Dollar", content = "$", ison = True }
-    , { description = "Double Quote", content = "\"", ison = True }
-    , { description = "Equal", content = "=", ison = True }
-    , { description = "Exclamation", content = "!", ison = True }
-    , { description = "Greater Than", content = ">", ison = True }
-    , { description = "Hash", content = "#", ison = True }
-    , { description = "Left Brace", content = "{", ison = True }
-    , { description = "Left Bracket", content = "[", ison = True }
-    , { description = "Left Parenthesis", content = "(", ison = True }
-    , { description = "Less Than", content = "<", ison = True }
-    , { description = "Minus", content = "-", ison = True }
-    , { description = "Percent", content = "%", ison = True }
-    , { description = "Period", content = ".", ison = True }
-    , { description = "Plus", content = "+", ison = True }
-    , { description = "Question", content = "?", ison = True }
-    , { description = "Right Brace", content = "}", ison = True }
-    , { description = "Right Bracket", content = "]", ison = True }
-    , { description = "Right Parenthesis", content = ")", ison = True }
-    , { description = "Semicolon", content = ";", ison = True }
-    , { description = "Slash", content = "/", ison = True }
-    , { description = "Space", content = " ", ison = True }
-    , { description = "Tilde", content = "~", ison = True }
+    { description_en = "Ampersand", description_ja = "アンド", content = "&", ison = True }
+    , { description_en = "Apostrophe", description_ja = "アポストロフィ", content = "'", ison = True }
+    , { description_en = "At", description_ja = "アット", content = "@", ison = True }
+    , { description_en = "Backslash", description_ja = "バックスラッシュ", content = "\\", ison = True }
+    , { description_en = "Backtick", description_ja = "バックティック", content = "`", ison = True }
+    , { description_en = "Bar", description_ja = "バー", content = "|", ison = True }
+    , { description_en = "Caret", description_ja = "キャレット", content = "^", ison = True }
+    , { description_en = "Colon", description_ja = "コロン", content = ":", ison = True }
+    , { description_en = "Comma", description_ja = "コンマ", content = ",", ison = True }
+    , { description_en = "Dollar", description_ja = "ドル", content = "$", ison = True }
+    , { description_en = "Double quote", description_ja = "ダブルクォート", content = "\"", ison = True }
+    , { description_en = "Equal", description_ja = "イコール", content = "=", ison = True }
+    , { description_en = "Exclamation", description_ja = "エクスクラメーション", content = "!", ison = True }
+    , { description_en = "Greater than", description_ja = "グレーター", content = ">", ison = True }
+    , { description_en = "Hash", description_ja = "ハッシュ", content = "#", ison = True }
+    , { description_en = "Left brace", description_ja = "左ブレース", content = "{", ison = True }
+    , { description_en = "Left bracket", description_ja = "左ブラケット", content = "[", ison = True }
+    , { description_en = "Left parenthesis", description_ja = "左パランテーシス", content = "(", ison = True }
+    , { description_en = "Less than", description_ja = "レス", content = "<", ison = True }
+    , { description_en = "Minus", description_ja = "マイナス", content = "-", ison = True }
+    , { description_en = "Percent", description_ja = "パーセント", content = "%", ison = True }
+    , { description_en = "Period", description_ja = "ピリオド", content = ".", ison = True }
+    , { description_en = "Plus", description_ja = "プラス", content = "+", ison = True }
+    , { description_en = "Question", description_ja = "クエスチョン", content = "?", ison = True }
+    , { description_en = "Right brace", description_ja = "右ブレース", content = "}", ison = True }
+    , { description_en = "Right bracket", description_ja = "右ブラケット", content = "]", ison = True }
+    , { description_en = "Right parenthesis", description_ja = "右パランテーシス", content = ")", ison = True }
+    , { description_en = "Semicolon", description_ja = "セミコロン", content = ";", ison = True }
+    , { description_en = "Slash", description_ja = "スラッシュ", content = "/", ison = True }
+    , { description_en = "Space", description_ja = "スペース", content = " ", ison = True }
+    , { description_en = "Tilde", description_ja = "チルダ", content = "~", ison = True }
   ]
   }
 
@@ -166,7 +167,10 @@ view model =
             [ text "使用する記号" ],
             td []
             [
-              div [] []
+              div [] <| List.map (\x -> label [] [
+                input [ type_ "checkbox", checked x.ison, onCheck SymbolChange ] [],
+                span [] [ text <| x.content ++ " " ++ "(" ++ x.description_ja ++ ")" ]
+              ]) model.symbolset
             ]
           ],
           tr [] -- 文字数の列

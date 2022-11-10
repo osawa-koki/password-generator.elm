@@ -189,12 +189,9 @@ view model =
         ]
       ],
       div [ class "resultContainer" ]
-      [ button [] [ text "generate!" ]
+      [ button [ onClick clicked ] [ text "generate!" ]
       , div [ class "text" ] [ text "" ]
       ]
     ]
 
-viewInput : String -> String -> String -> (String -> msg) -> Html msg
-viewInput t p v toMsg =
-  input [ type_ t, placeholder p, value v, onInput toMsg ] []
 

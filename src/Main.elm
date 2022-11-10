@@ -104,7 +104,7 @@ update msg model =
     SymbolSetChange a b ->
       { model | symbolset = List.map (\x -> if x.description_en == a then { x | ison = b } else x) model.symbolset }
     Clicked ->
-      { model | resultlist = List.repeat 10 <| generatePassword model }
+      { model | resultlist = createCharSet model }
 
 
 type alias CharCount =
@@ -121,13 +121,28 @@ charCount =
   }
 
 
-generatePassword : Model -> String
-generatePassword model =
+createCharSet : Model -> List String
+createCharSet model =
   let
-    randomString = String.fromInt model.passwordlength
-  in
-    randomString
+    numeric =
+      if model.numeric then
+        List.repeat charCount.numeric "0123456789"
+      else
+        []
 
+    alphemeric =
+      if model.alphemeric then
+        List.repeat charCount.alphemeric "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      else
+        []
+
+    symbol =
+      if model.symbol then
+        List.map .content <| List.filter .ison model.symbolset
+      else
+        []
+  in
+    List.concat [ numeric, alphemeric, symbol ]
 
 
 numDefault : Maybe Int -> Int

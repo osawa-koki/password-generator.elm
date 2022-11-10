@@ -193,7 +193,7 @@ view model =
       ],
       div [ class "resultContainer" ]
       [ button [ onClick Clicked ] [ text "generate!" ]
-      , div [ class "text" ] [ text "" ]
+      , ul [] <| List.map (\x -> li [] [ text x ]) model.resultlist
       ]
     ]
 

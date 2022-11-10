@@ -88,6 +88,7 @@ type Msg
   | SymbolChange Bool
   | SymbolSetChange String Bool
   | Clicked
+  | GetRandomNumber Int
 
 
 update : Msg -> Model -> Model
@@ -105,6 +106,8 @@ update msg model =
       { model | symbolset = List.map (\x -> if x.description_en == a then { x | ison = b } else x) model.symbolset }
     Clicked ->
       { model | resultlist = createCharSet model }
+    GetRandomNumber n ->
+      model
 
 
 type alias CharCount =
@@ -120,6 +123,15 @@ charCount =
   , symbol = 0
   }
 
+
+
+generatePassword : Model -> String
+generatePassword model =
+  let
+    charSet =
+      createCharSet model
+  in
+    String.join "" <| List.map (\_ -> "Random.generate (0, List.length charSet - 1) charSet") <| List.range 0 (model.passwordlength - 1)
 
 
 -- 使用する文字一覧をリスト型で取得。

@@ -87,6 +87,7 @@ type Msg
   | AlphemericChange Bool
   | SymbolChange Bool
   | SymbolSetChange String Bool
+  | Clicked
 
 
 update : Msg -> Model -> Model
@@ -102,6 +103,8 @@ update msg model =
       { model | symbol = a }
     SymbolSetChange a b ->
       { model | symbolset = List.map (\x -> if x.description_en == a then { x | ison = b } else x) model.symbolset }
+    Clicked ->
+      { model | resultlist = List.repeat 10 <| generatePassword model }
 
 
 type alias CharCount =
@@ -118,8 +121,8 @@ charCount =
   }
 
 
-createRandomString : Int -> Model -> String
-createRandomString length model =
+generatePassword : Model -> String
+generatePassword model =
   let
     randomString = String.fromInt model.passwordlength
   in
@@ -189,7 +192,7 @@ view model =
         ]
       ],
       div [ class "resultContainer" ]
-      [ button [ onClick clicked ] [ text "generate!" ]
+      [ button [ onClick Clicked ] [ text "generate!" ]
       , div [ class "text" ] [ text "" ]
       ]
     ]

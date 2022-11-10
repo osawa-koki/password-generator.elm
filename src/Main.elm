@@ -126,13 +126,13 @@ createCharSet model =
   let
     numeric =
       if model.numeric then
-        List.repeat charCount.numeric "0123456789"
+        String.split "" "0123456789"
       else
         []
 
     alphemeric =
       if model.alphemeric then
-        List.repeat charCount.alphemeric "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        String.split ""  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
       else
         []
 

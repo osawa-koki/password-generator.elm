@@ -5,6 +5,7 @@ import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Random
+import Array
 
 
 main : Program () Model Msg
@@ -139,10 +140,20 @@ createPassword charSet passwordLength =
   let
     charSetLength =
       List.length charSet
+    charSrtArray =
+      Array.fromList charSet
   in
-    List.map (\_ -> "- ") (List.range 1 passwordLength)
+    List.map (\_ -> charDefault <| Array.get 2 charSrtArray) (List.range 1 passwordLength)
       |> String.join ""
 
+
+charDefault : Maybe String -> String
+charDefault char =
+  case char of
+    Just x ->
+      x
+    Nothing ->
+      "0"
 
 
 -- 使用する文字一覧をリスト型で取得。

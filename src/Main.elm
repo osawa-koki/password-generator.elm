@@ -143,7 +143,7 @@ createPassword charSet passwordLength =
     charSrtArray =
       Array.fromList charSet
   in
-    List.map (\_ -> charDefault <| Array.get 2 charSrtArray) (List.range 1 passwordLength)
+    List.map (\_ -> charDefault <| Array.get (gen_rand_num charSetLength) charSrtArray) (List.range 1 passwordLength)
       |> String.join ""
 
 
@@ -154,6 +154,17 @@ charDefault char =
       x
     Nothing ->
       "0"
+
+
+gen_rand_num : Int -> Int
+gen_rand_num max =
+  1
+
+
+
+gen_rand_num_helper : Random.Generator Int
+gen_rand_num_helper =
+  Random.int 0 9
 
 
 -- 使用する文字一覧をリスト型で取得。

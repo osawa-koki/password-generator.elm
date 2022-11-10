@@ -121,6 +121,8 @@ charCount =
   }
 
 
+
+-- 使用する文字一覧をリスト型で取得。
 createCharSet : Model -> List String
 createCharSet model =
   let

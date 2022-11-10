@@ -105,7 +105,7 @@ update msg model =
     SymbolSetChange a b ->
       { model | symbolset = List.map (\x -> if x.description_en == a then { x | ison = b } else x) model.symbolset }
     Clicked ->
-      { model | resultlist = createCharSet model }
+      { model | resultlist = generatePassword model }
     GetRandomNumber n ->
       model
 
@@ -125,13 +125,14 @@ charCount =
 
 
 
-generatePassword : Model -> String
+generatePassword : Model -> List String
 generatePassword model =
   let
     charSet =
       createCharSet model
   in
-    String.join "" <| List.map (\_ -> "Random.generate (0, List.length charSet - 1) charSet") <| List.range 0 (model.passwordlength - 1)
+    List.map (\_ -> "List.take (Random.generate (0, List.length charSet - 1)) charSet")
+      <| List.range 1 30 -- 「30」個のパスワードを生成する。
 
 
 -- 使用する文字一覧をリスト型で取得。

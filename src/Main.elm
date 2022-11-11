@@ -4,9 +4,6 @@ import Browser
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
-import Random
-import Array
-import Json.Decode as D
 import Json.Encode as E
 
 
@@ -180,7 +177,7 @@ numDefault maybezero =
 
 
 subscriptions : Model -> Sub Msg
-subscriptions model =
+subscriptions _ =
   receive_password Recv
 
 

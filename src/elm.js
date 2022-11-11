@@ -5695,10 +5695,7 @@ var $author$project$Main$view = function (model) {
 					[
 						A2(
 						$elm$html$Html$div,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$class('resultUnit')
-							]),
+						_List_Nil,
 						A2(
 							$elm$core$List$map,
 							function (x) {
@@ -5706,7 +5703,7 @@ var $author$project$Main$view = function (model) {
 									$elm$html$Html$div,
 									_List_fromArray(
 										[
-											$elm$html$Html$Attributes$class('password_text')
+											$elm$html$Html$Attributes$class('resultUnit')
 										]),
 									_List_fromArray(
 										[
@@ -5714,16 +5711,17 @@ var $author$project$Main$view = function (model) {
 											$elm$html$Html$div,
 											_List_fromArray(
 												[
-													$elm$html$Html$Attributes$class('password_copy')
+													$elm$html$Html$Attributes$class('password_text')
 												]),
 											_List_fromArray(
 												[
 													$elm$html$Html$text(x)
 												])),
 											A2(
-											$elm$html$Html$div,
+											$elm$html$Html$button,
 											_List_fromArray(
 												[
+													$elm$html$Html$Attributes$class('password_button'),
 													$elm$html$Html$Events$onClick(
 													$author$project$Main$Copy(x))
 												]),

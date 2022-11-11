@@ -20,5 +20,12 @@
   .resultContainer {
     margin: 25px auto;
     max-width: 600px;
+    .resultUnit {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      margin: 10px;
+      border-bottom: 1px gray solid;
+    }
   }
 }

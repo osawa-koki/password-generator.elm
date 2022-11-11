@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Main</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="elm.js"></script>
+</head>
+<body>
+  <div id="elm"><div id="app"></div></div>
+  <script>
+    var app = Elm.Main.init({
+      node: document.getElementById('app')
+    });
+    app.ports.generate_password.subscribe(function(message) {
+      const json = JSON.parse(message);
+      const components = json.password_components.split("");
+      for (let password_count = 0; password_count < 10; password_count++) {
+        let password = "";
+        for (let i = 0; i < json.password_length; i++) {
+          password += components[Math.floor(Math.random() * components.length)]
+        }
+        app.ports.receive_password.send(password);
+      }
+    });
+    app.ports.copy_to_clipboard.subscribe(function(message) {
+      navigator.clipboard.writeText(message);
+    });
+  </script>
+</body>
+</html>

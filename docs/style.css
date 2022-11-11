@@ -1,0 +1,44 @@
+#elm #settingTable {
+  margin: 25px auto;
+  border-collapse: collapse;
+  max-width: 600px;
+}
+#elm #settingTable .off {
+  display: none;
+}
+#elm #settingTable th, #elm #settingTable td {
+  border: 1px black solid;
+  padding: 10px;
+}
+#elm #settingTable th {
+  width: 100px;
+}
+#elm #generate_password {
+  display: block;
+  padding: 10px 25px;
+  margin: 0 auto;
+  background-color: aqua;
+  cursor: pointer;
+}
+#elm #generate_password:hover {
+  color: white;
+  background-color: blue;
+}
+#elm .resultContainer {
+  margin: 25px auto;
+  max-width: 600px;
+  max-height: 500px;
+  overflow: auto;
+  border: 1px black solid;
+}
+#elm .resultContainer #resultTable {
+  width: 100%;
+}
+#elm .resultContainer #resultTable .resultUnit th, #elm .resultContainer #resultTable .resultUnit td {
+  padding: 10px;
+  margin: 10px;
+  border-bottom: 1px lightgray solid;
+}
+#elm .resultContainer #resultTable .resultUnit th .password_button, #elm .resultContainer #resultTable .resultUnit td .password_button {
+  cursor: pointer;
+}

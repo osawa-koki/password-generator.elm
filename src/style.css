@@ -1,0 +1,20 @@
+#elm table {
+  margin: 25px auto;
+  border-collapse: collapse;
+  max-width: 600px;
+}
+#elm table th, #elm table td {
+  border: 1px black solid;
+  padding: 10px;
+}
+#elm table th {
+  width: 200px;
+}
+#elm button {
+  display: block;
+  margin: 0 auto;
+}
+#elm .resultContainer {
+  margin: 25px auto;
+  max-width: 600px;
+}

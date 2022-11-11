@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+#elm {
+  table {
+    margin: 25px auto;
+    border-collapse: collapse;
+    max-width: 600px;
+    th, td {
+      border: 1px black solid;
+      padding: 10px;
+    }
+    th {
+      width: 200px;
+    }
+  }
+  button {
+    display: block;
+    margin: 0 auto;
+  }
+  .resultContainer {
+    margin: 25px auto;
+    max-width: 600px;
+  }
+}

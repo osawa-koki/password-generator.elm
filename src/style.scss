@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #elm {
-  table {
+  #settingTable {
     margin: 25px auto;
     border-collapse: collapse;
     max-width: 600px;
@@ -10,7 +10,7 @@
       padding: 10px;
     }
     th {
-      width: 200px;
+      width: 100px;
     }
   }
   button {
@@ -20,12 +20,24 @@
   .resultContainer {
     margin: 25px auto;
     max-width: 600px;
-    .resultUnit {
-      display: flex;
-      justify-content: space-around;
-      padding: 10px;
-      margin: 10px;
-      border-bottom: 1px gray solid;
+    max-height: 500px;
+    overflow: auto;
+    border: 1px black solid;
+    #resultTable {
+      width: 100%;
+      .resultUnit {
+        th, td {
+          padding: 10px;
+          margin: 10px;
+          border-bottom: 1px lightgray solid;
+          .password_text {
+
+          }
+          .password_button {
+            cursor: pointer;
+          }
+        }
+      }
     }
   }
 }

@@ -70,7 +70,7 @@ init _ =
     , { description_en = "Right parenthesis", description_ja = "右パランテーシス", content = ")", ison = True }
     , { description_en = "Semicolon", description_ja = "セミコロン", content = ";", ison = True }
     , { description_en = "Slash", description_ja = "スラッシュ", content = "/", ison = True }
-    , { description_en = "Space", description_ja = "スペース", content = " ", ison = True }
+    , { description_en = "Space", description_ja = "スペース", content = " ", ison = False }
     , { description_en = "Tilde", description_ja = "チルダ", content = "~", ison = True }
   ]
   , resultlist = []
@@ -191,7 +191,7 @@ view model =
     [
       div [ class "settingContainer" ]
       [
-        table []
+        table [ id "settingTable" ]
         [
           tr [] -- 使用する文字の列
           [
@@ -236,7 +236,7 @@ view model =
       ],
       button [ onClick Clicked ] [ text "generate!" ],
       div [ class "resultContainer" ]
-      [ div [] <| List.map (\x -> div [class "resultUnit"] [ div [ class "password_text" ] [ text x ], button [ class "password_button", onClick <| Copy x ] [ text "Copy!" ] ]) <| List.reverse model.resultlist
+      [ table [ id "resultTable" ] <| List.map (\x -> tr [class "resultUnit"] [ th [ class "password_text" ] [ text x ], td [] [button [ class "password_button", onClick <| Copy x ] [ text "Copy!" ]] ]) <| List.reverse model.resultlist
       ]
     ]
 

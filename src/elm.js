@@ -5403,6 +5403,7 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 	});
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
+var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$main_ = _VirtualDom_node('main');
@@ -5497,7 +5498,10 @@ var $author$project$Main$view = function (model) {
 					[
 						A2(
 						$elm$html$Html$table,
-						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$id('settingTable')
+							]),
 						_List_fromArray(
 							[
 								A2(
@@ -5694,13 +5698,16 @@ var $author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(
-						$elm$html$Html$div,
-						_List_Nil,
+						$elm$html$Html$table,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$id('resultTable')
+							]),
 						A2(
 							$elm$core$List$map,
 							function (x) {
 								return A2(
-									$elm$html$Html$div,
+									$elm$html$Html$tr,
 									_List_fromArray(
 										[
 											$elm$html$Html$Attributes$class('resultUnit')
@@ -5708,7 +5715,7 @@ var $author$project$Main$view = function (model) {
 									_List_fromArray(
 										[
 											A2(
-											$elm$html$Html$div,
+											$elm$html$Html$th,
 											_List_fromArray(
 												[
 													$elm$html$Html$Attributes$class('password_text')
@@ -5718,16 +5725,22 @@ var $author$project$Main$view = function (model) {
 													$elm$html$Html$text(x)
 												])),
 											A2(
-											$elm$html$Html$button,
+											$elm$html$Html$td,
+											_List_Nil,
 											_List_fromArray(
 												[
-													$elm$html$Html$Attributes$class('password_button'),
-													$elm$html$Html$Events$onClick(
-													$author$project$Main$Copy(x))
-												]),
-											_List_fromArray(
-												[
-													$elm$html$Html$text('Copy!')
+													A2(
+													$elm$html$Html$button,
+													_List_fromArray(
+														[
+															$elm$html$Html$Attributes$class('password_button'),
+															$elm$html$Html$Events$onClick(
+															$author$project$Main$Copy(x))
+														]),
+													_List_fromArray(
+														[
+															$elm$html$Html$text('Copy!')
+														]))
 												]))
 										]));
 							},

@@ -1,14 +1,14 @@
-#elm table {
+#elm #settingTable {
   margin: 25px auto;
   border-collapse: collapse;
   max-width: 600px;
 }
-#elm table th, #elm table td {
+#elm #settingTable th, #elm #settingTable td {
   border: 1px black solid;
   padding: 10px;
 }
-#elm table th {
-  width: 200px;
+#elm #settingTable th {
+  width: 100px;
 }
 #elm button {
   display: block;
@@ -17,11 +17,18 @@
 #elm .resultContainer {
   margin: 25px auto;
   max-width: 600px;
+  max-height: 500px;
+  overflow: auto;
+  border: 1px black solid;
 }
-#elm .resultContainer .resultUnit {
-  display: flex;
-  justify-content: space-around;
+#elm .resultContainer #resultTable {
+  width: 100%;
+}
+#elm .resultContainer #resultTable .resultUnit th, #elm .resultContainer #resultTable .resultUnit td {
   padding: 10px;
   margin: 10px;
-  border-bottom: 1px gray solid;
+  border-bottom: 1px lightgray solid;
+}
+#elm .resultContainer #resultTable .resultUnit th .password_button, #elm .resultContainer #resultTable .resultUnit td .password_button {
+  cursor: pointer;
 }

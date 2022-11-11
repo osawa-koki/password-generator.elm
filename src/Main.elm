@@ -1,4 +1,4 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Browser
 import Html exposing (..)
@@ -6,11 +6,13 @@ import Html.Events exposing (..)
 import Html.Attributes exposing (..)
 import Random
 import Array
+import Json.Decode as D
+import Json.Encode as E
 
 
 main : Program () Model Msg
 main =
-  Browser.sandbox { init = init, update = update, view = view }
+  Browser.element { init = init, update = update, view = view, subscriptions = subscriptions }
 
 
 
@@ -35,9 +37,9 @@ type alias Model =
   }
 
 
-init : Model
-init =
-  { passwordlength = 8
+init : () -> (Model, Cmd Msg)
+init _ =
+  ({ passwordlength = 8
   , numeric = True
   , alphemeric = True
   , symbol = True
@@ -75,8 +77,12 @@ init =
     , { description_en = "Tilde", description_ja = "チルダ", content = "~", ison = True }
   ]
   , resultlist = []
-  }
+  }, Cmd.none)
 
+
+port generate_password : String -> Cmd msg
+port receive_password : (String -> msg) -> Sub msg
+port copy_to_clipboard : String -> Cmd msg
 
 
 -- UPDATE
@@ -89,23 +95,31 @@ type Msg
   | SymbolChange Bool
   | SymbolSetChange String Bool
   | Clicked
+  | Recv String
+  | Copy String
 
 
-update : Msg -> Model -> Model
+
+update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     PasswordLengthChange a ->
-      { model | passwordlength = numDefault <| String.toInt a }
+      ({ model | passwordlength = numDefault <| String.toInt a }, Cmd.none)
     AlphemericChange a ->
-      { model | alphemeric = a }
+      ({ model | alphemeric = a }, Cmd.none)
     NumericChange a ->
-      { model | numeric = a }
+      ({ model | numeric = a }, Cmd.none)
     SymbolChange a ->
-      { model | symbol = a }
+      ({ model | symbol = a }, Cmd.none)
     SymbolSetChange a b ->
-      { model | symbolset = List.map (\x -> if x.description_en == a then { x | ison = b } else x) model.symbolset }
+      ({ model | symbolset = List.map (\x -> if x.description_en == a then { x | ison = b } else x) model.symbolset }, Cmd.none)
     Clicked ->
-      { model | resultlist = generatePassword model }
+      ( model, generate_password <| E.encode 1 (E.object [("password_length", E.int model.passwordlength), ("password_components", E.string <| String.join "" <| createCharSet model)]))
+    Recv password ->
+      ({ model | resultlist = model.resultlist ++ [password] }, Cmd.none )
+    Copy message ->
+      ( model, copy_to_clipboard message)
+
 
 
 
@@ -123,30 +137,6 @@ charCount =
   }
 
 
-
-generatePassword : Model -> List String
-generatePassword model =
-  let
-    charSet =
-      createCharSet model
-  in
-    List.map (\_ -> createPassword charSet model.passwordlength)
-      <| List.range 1 30 -- 「30」個のパスワードを生成する。
-
-
-
-createPassword : List String -> Int -> String
-createPassword charSet passwordLength =
-  let
-    charSetLength =
-      List.length charSet
-    charSrtArray =
-      Array.fromList charSet
-  in
-    List.map (\_ -> charDefault <| Array.get (gen_rand_num charSetLength) charSrtArray) (List.range 1 passwordLength)
-      |> String.join ""
-
-
 charDefault : Maybe String -> String
 charDefault char =
   case char of
@@ -154,17 +144,6 @@ charDefault char =
       x
     Nothing ->
       "0"
-
-
-gen_rand_num : Int -> Int
-gen_rand_num max =
-  1
-
-
-
-gen_rand_num_helper : Random.Generator Int
-gen_rand_num_helper =
-  Random.int 0 9
 
 
 -- 使用する文字一覧をリスト型で取得。
@@ -198,6 +177,11 @@ numDefault maybezero =
     Just num -> num
     Nothing -> 8
 
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+  receive_password Recv
 
 
 
@@ -255,7 +239,7 @@ view model =
       ],
       div [ class "resultContainer" ]
       [ button [ onClick Clicked ] [ text "generate!" ]
-      , ul [] <| List.map (\x -> li [] [ text x ]) model.resultlist
+      , ul [] <| List.map (\x -> li [ ] [ div [] [ text x ], div [ onClick <| Copy x ] [ text "Copy!" ] ]) <| List.reverse model.resultlist
       ]
     ]
 

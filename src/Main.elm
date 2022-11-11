@@ -234,7 +234,7 @@ view model =
           ]
         ]
       ],
-      button [ onClick Clicked ] [ text "generate!" ],
+      button [ id "generate_password", onClick Clicked ] [ text "generate!" ],
       div [ class "resultContainer" ]
       [ table [ id "resultTable" ] <| List.map (\x -> tr [class "resultUnit"] [ th [ class "password_text" ] [ text x ], td [] [button [ class "password_button", onClick <| Copy x ] [ text "Copy!" ]] ]) <| List.reverse model.resultlist
       ]

@@ -5194,7 +5194,7 @@ var $author$project$Main$init = function (_v0) {
 					{b: ')', c: 'Right parenthesis', d: '右パランテーシス', a: true},
 					{b: ';', c: 'Semicolon', d: 'セミコロン', a: true},
 					{b: '/', c: 'Slash', d: 'スラッシュ', a: true},
-					{b: ' ', c: 'Space', d: 'スペース', a: true},
+					{b: ' ', c: 'Space', d: 'スペース', a: false},
 					{b: '~', c: 'Tilde', d: 'チルダ', a: true}
 				])
 		},
@@ -5683,6 +5683,7 @@ var $author$project$Main$view = function (model) {
 				$elm$html$Html$button,
 				_List_fromArray(
 					[
+						$elm$html$Html$Attributes$id('generate_password'),
 						$elm$html$Html$Events$onClick($author$project$Main$Clicked)
 					]),
 				_List_fromArray(

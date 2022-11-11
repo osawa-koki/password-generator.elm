@@ -5,6 +5,9 @@
     margin: 25px auto;
     border-collapse: collapse;
     max-width: 600px;
+    .off {
+      display: none;
+    }
     th, td {
       border: 1px black solid;
       padding: 10px;
@@ -13,9 +16,16 @@
       width: 100px;
     }
   }
-  button {
+  #generate_password {
     display: block;
+    padding: 10px 25px;
     margin: 0 auto;
+    background-color: aqua;
+    cursor: pointer;
+    &:hover {
+      color: white;
+      background-color: blue;
+    }
   }
   .resultContainer {
     margin: 25px auto;

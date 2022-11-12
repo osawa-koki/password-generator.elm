@@ -1,6 +1,6 @@
 
 # 前回の分を削除
-Remove-Item -Path "./docs*.*" -Force -Recurse
+Remove-Item -Path "./docs/*.*" -Force -Recurse
 
 # 資産系をコピー
 Copy-Item -Path "./public/index.html" -Destination "./docs/index.html" -Recurse

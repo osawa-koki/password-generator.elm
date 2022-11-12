@@ -10,3 +10,7 @@ Copy-Item -Path "./public/favicon.ico" -Destination "./docs/favicon.ico" -Recurs
 
 # elmファイルのビルドとデプロイ
 elm make "src/Main.elm" --optimize --output="docs/elm.js"
+
+# コミットとプッシュ
+git commit -m "auto commit for deployment."
+git push -u origin

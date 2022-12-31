@@ -1,6 +1,7 @@
 # password-generator
 
 パスワード生成サイト。  
+elmを使った簡単なプログラムを作ってみたかった、、、  
 
 ## 実行方法
 
@@ -14,6 +15,10 @@ elm make src/Main.elm
 # JSビルド
 elm make src/Main.elm --optimize --output=src/elm.js
 ```
+
+## 環境構築
+
+[公式ドキュメント](https://guide.elm-lang.jp/install/elm.html)を参照。  
 
 ## 参考文献
 
